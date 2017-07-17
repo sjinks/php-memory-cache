@@ -171,11 +171,4 @@ class CacheItem implements \Psr\Cache\CacheItemInterface
 
         return $this;
     }
-
-    public function __clone()
-    {
-        if (is_object($this->value)) {
-            $this->value = clone $this->value;
-        }
-    }
 }
