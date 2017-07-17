@@ -127,7 +127,7 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
      */
     public function getMultiple($keys, $default = null)
     {
-        \WildWolf\Cache\Validator::validateTraversable($keys);
+        \WildWolf\Cache\Validator::validateIterable($keys);
 
         $result = [];
         foreach ($keys as $key) {
@@ -153,7 +153,7 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
      */
     public function setMultiple($values, $ttl = null)
     {
-        \WildWolf\Cache\Validator::validateTraversable($values);
+        \WildWolf\Cache\Validator::validateIterable($values);
         \WildWolf\Cache\Validator::validateTtl($ttl);
 
         $result = true;
@@ -181,7 +181,7 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
      */
     public function deleteMultiple($keys)
     {
-        \WildWolf\Cache\Validator::validateTraversable($keys);
+        \WildWolf\Cache\Validator::validateIterable($keys);
 
         $result = true;
         foreach ($keys as $key) {

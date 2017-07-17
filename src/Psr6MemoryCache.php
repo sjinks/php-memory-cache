@@ -44,7 +44,7 @@ class Psr6MemoryCache implements \Psr\Cache\CacheItemPoolInterface
         if (isset($this->cache[$key])) {
             list($data, $expires) = $this->cache[$key];
 
-            $item = new \WildWolf\MemoryCache\CacheItem($key);
+            $item = new \WildWolf\Cache\CacheItem($key);
             if (null === $expires || (new \DateTime()) < $expires) {
                 $item->setIsHit(true);
                 $item->set(is_object($data) ? clone $data : $data);
@@ -55,7 +55,7 @@ class Psr6MemoryCache implements \Psr\Cache\CacheItemPoolInterface
             unset($this->cache[$key]);
         }
 
-        return new \WildWolf\MemoryCache\CacheItem($key);
+        return new \WildWolf\Cache\CacheItem($key);
     }
 
     /**
@@ -179,7 +179,7 @@ class Psr6MemoryCache implements \Psr\Cache\CacheItemPoolInterface
             $val = clone $val;
         }
 
-        if (!($item instanceof \WildWolf\MemoryCache\CacheItem)) {
+        if (!($item instanceof \WildWolf\Cache\CacheItem)) {
             $expires = null;
         } else {
             $expires = $item->expires();
