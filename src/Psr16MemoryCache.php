@@ -6,29 +6,6 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
 {
     private $cache = [];
 
-    private static function validateKey($key)
-    {
-        static $disallowed = '{}()/\@:';
-
-        if (!is_string($key) || $key === '' || false !== strpbrk($key, $disallowed)) {
-            throw new \WildWolf\Cache\InvalidArgumentException();
-        }
-    }
-
-    private static function validateTtl($ttl)
-    {
-        if (!is_int($ttl) && null !== $ttl && !($ttl instanceof \DateInterval)) {
-            throw new \WildWolf\Cache\InvalidArgumentException();
-        }
-    }
-
-    private static function validateTraversable($v)
-    {
-        if (!is_array($v) && !($v instanceof \Traversable)) {
-            throw new \WildWolf\Cache\InvalidArgumentException();
-        }
-    }
-
     public static function instance()
     {
         static $self = null;
@@ -57,7 +34,7 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
      */
     public function get($key, $default = null)
     {
-        self::validateKey($key);
+        \WildWolf\Cache\Validator::validateKey($key);
 
         if (isset($this->cache[$key])) {
             list($data, $expires) = $this->cache[$key];
@@ -88,8 +65,8 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
      */
     public function set($key, $value, $ttl = null)
     {
-        self::validateKey($key);
-        self::validateTtl($ttl);
+        \WildWolf\Cache\Validator::validateKey($key);
+        \WildWolf\Cache\Validator::validateTtl($ttl);
 
         if ($ttl instanceof \DateInterval) {
             $expires = new \DateTime();
@@ -120,7 +97,7 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
      */
     public function delete($key)
     {
-        self::validateKey($key);
+        \WildWolf\Cache\Validator::validateKey($key);
         unset($this->cache[$key]);
         return true;
     }
@@ -150,7 +127,7 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
      */
     public function getMultiple($keys, $default = null)
     {
-        self::validateTraversable($keys);
+        \WildWolf\Cache\Validator::validateTraversable($keys);
 
         $result = [];
         foreach ($keys as $key) {
@@ -176,8 +153,8 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
      */
     public function setMultiple($values, $ttl = null)
     {
-        self::validateTraversable($values);
-        self::validateTtl($ttl);
+        \WildWolf\Cache\Validator::validateTraversable($values);
+        \WildWolf\Cache\Validator::validateTtl($ttl);
 
         $result = true;
         foreach ($values as $key => $value) {
@@ -204,7 +181,7 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
      */
     public function deleteMultiple($keys)
     {
-        self::validateTraversable($keys);
+        \WildWolf\Cache\Validator::validateTraversable($keys);
 
         $result = true;
         foreach ($keys as $key) {
@@ -231,7 +208,7 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
      */
     public function has($key)
     {
-        self::validateKey($key);
+        \WildWolf\Cache\Validator::validateKey($key);
 
         if (isset($this->cache[$key])) {
             list($data, $expires) = $this->cache[$key];

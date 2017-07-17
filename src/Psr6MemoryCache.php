@@ -48,7 +48,7 @@ class Psr6MemoryCache implements \Psr\Cache\CacheItemPoolInterface
      */
     public function getItem($key)
     {
-        self::validateKey($key);
+        \WildWolf\Cache\Validator::validateKey($key);
 
         if (isset($this->cache[$key])) {
             list($data, $expires) = $this->cache[$key];
@@ -145,7 +145,7 @@ class Psr6MemoryCache implements \Psr\Cache\CacheItemPoolInterface
      */
     public function deleteItem($key)
     {
-        self::validateKey($key);
+        \WildWolf\Cache\Validator::validateKey($key);
         unset($this->cache[$key]);
         return true;
     }
