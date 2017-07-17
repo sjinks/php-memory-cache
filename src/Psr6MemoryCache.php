@@ -49,11 +49,10 @@ class Psr6MemoryCache implements \Psr\Cache\CacheItemPoolInterface
                 $item->setIsHit(true);
                 $item->set(is_object($data) ? clone $data : $data);
                 $item->expiresAt($expires);
-            } else {
-                unset($this->cache[$key]);
+                return $item;
             }
 
-            return $item;
+            unset($this->cache[$key]);
         }
 
         return new \WildWolf\MemoryCache\CacheItem($key);
