@@ -94,11 +94,9 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
         if ($ttl instanceof \DateInterval) {
             $expires = new \DateTime();
             $expires->add($ttl);
-        }
-        elseif (is_numeric($ttl)) {
+        } elseif (is_numeric($ttl)) {
             $expires = new \DateTime('now +' . $ttl . ' seconds');
-        }
-        else {
+        } else {
             $expires = null;
         }
 

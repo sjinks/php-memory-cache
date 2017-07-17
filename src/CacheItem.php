@@ -47,7 +47,7 @@ class CacheItem implements \Psr\Cache\CacheItemInterface
     /**
      * @internal
      * @param bool $v
-     * @return \WildWolf\CacheItem
+     * @return \WildWolf\MemoryCache\CacheItem
      */
     public function setIsHit($v)
     {
@@ -162,12 +162,10 @@ class CacheItem implements \Psr\Cache\CacheItemInterface
             $expires = new \DateTime();
             $expires->add($time);
             $this->expires = $expires;
-        }
-        elseif (is_numeric($time)) {
+        } elseif (is_numeric($time)) {
             $expires = new \DateTime('now +' . $time . ' seconds');
             $this->expires = $expires;
-        }
-        else {
+        } else {
             $this->expires = null;
         }
 
