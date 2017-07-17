@@ -6,15 +6,6 @@ class Psr6MemoryCache implements \Psr\Cache\CacheItemPoolInterface
 {
     private $cache = [];
 
-    private static function validateKey($key)
-    {
-        static $disallowed = '{}()/\@:';
-
-        if (!is_string($key) || $key === '' || false !== strpbrk($key, $disallowed)) {
-            throw new \WildWolf\Cache\InvalidArgumentException();
-        }
-    }
-
     public static function instance()
     {
         static $self = null;
