@@ -1,5 +1,6 @@
 {
     "name": "wildwolf/psr-memory-cache",
+    "description": "PSR-6 and PSR-16 compliant memory cache",
     "keywords": ["cache", "psr6", "psr16", "memory cache"],
     "license": "MIT",
     "authors": [
