@@ -155,7 +155,7 @@ class Psr6MemoryCache implements \Psr\Cache\CacheItemPoolInterface
      *
      * @param string[] $keys
      *   An array of keys that should be removed from the pool.
-
+     *
      * @throws \Psr\Cache\InvalidArgumentException
      *   If any of the keys in $keys are not a legal value a \Psr\Cache\InvalidArgumentException
      *   MUST be thrown.
