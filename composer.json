@@ -11,7 +11,9 @@
     ],
     "autoload": {
         "psr-4": {
-            "WildWolf\\": "src/"
+            "WildWolf\\": "src/",
+            "WildWolf\\Cache\\": "src/",
+            "WildWolf\\MemoryCache\\": "src/"
         }
     },
     "require": {
