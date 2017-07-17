@@ -141,7 +141,7 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
      * Persists a set of key => value pairs in the cache, with an optional TTL.
      *
      * @param iterable              $values A list of key => value pairs for a multiple-set operation.
-     * @param null|int|DateInterval $ttl    Optional. The TTL value of this item. If no value is sent and
+     * @param null|int|\DateInterval $ttl   Optional. The TTL value of this item. If no value is sent and
      *                                      the driver supports TTL then the library may set a default value
      *                                      for it or let the driver take care of that.
      *
@@ -211,7 +211,7 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
         \WildWolf\Cache\Validator::validateKey($key);
 
         if (isset($this->cache[$key])) {
-            list($data, $expires) = $this->cache[$key];
+            list(, $expires) = $this->cache[$key];
 
             if (null === $expires || (new \DateTime()) < $expires) {
                 return true;
