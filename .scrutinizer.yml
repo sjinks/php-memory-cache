@@ -1,0 +1,20 @@
+checks:
+  php:
+    code_rating: true
+    duplication: true
+
+filter:
+  excluded_paths: [tests/*]
+
+build:
+  tests:
+    override:
+      -
+        command: 'vendor/bin/phpunit --coverage-clover=coverage.clv'
+        coverage:
+          file: 'coverage.clv'
+          format: 'clover'
+
+tools:
+  external_code_coverage:
+    timeout: 600
