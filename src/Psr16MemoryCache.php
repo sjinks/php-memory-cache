@@ -162,7 +162,7 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
                 $key = (string)$key;
             }
 
-            $result = $result && $this->set($key, $value, $ttl);
+            $result = $this->set($key, $value, $ttl) && $result;
         }
 
         return $result;
@@ -185,7 +185,7 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
 
         $result = true;
         foreach ($keys as $key) {
-            $result = $result && $this->delete($key);
+            $result = $this->delete($key) && $result;
         }
 
         return $result;
