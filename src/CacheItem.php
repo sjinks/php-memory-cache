@@ -51,13 +51,7 @@ class CacheItem implements \Psr\Cache\CacheItemInterface
      */
     public function setIsHit($v)
     {
-        if ($v !== $this->hit) {
-            $this->hit = $v;
-            if (!$v) {
-                $this->value = null;
-            }
-        }
-
+        $this->hit = $v;
         return $this;
     }
 
