@@ -21,6 +21,15 @@ class Psr6MemoryCache implements \Psr\Cache\CacheItemPoolInterface
     {
     }
 
+    private function createItem($key, $data, $expires) : \WildWolf\Cache\CacheItem
+    {
+        $item = new \WildWolf\Cache\CacheItem($key);
+        $item->setIsHit(true);
+        $item->set(is_object($data) ? clone $data : $data);
+        $item->expiresAt($expires);
+        return $item;
+    }
+
     /**
      * Returns a Cache Item representing the specified key.
      *
@@ -44,12 +53,8 @@ class Psr6MemoryCache implements \Psr\Cache\CacheItemPoolInterface
         if (isset($this->cache[$key])) {
             list($data, $expires) = $this->cache[$key];
 
-            $item = new \WildWolf\Cache\CacheItem($key);
             if (null === $expires || (new \DateTime()) < $expires) {
-                $item->setIsHit(true);
-                $item->set(is_object($data) ? clone $data : $data);
-                $item->expiresAt($expires);
-                return $item;
+                return $this->createItem($key, $data, $expires);
             }
 
             unset($this->cache[$key]);
