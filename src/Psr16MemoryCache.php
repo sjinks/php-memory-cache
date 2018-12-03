@@ -6,6 +6,9 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
 {
     private $cache = [];
 
+    /**
+     * @deprecated
+     */
     public static function instance()
     {
         static $self = null;
@@ -17,7 +20,7 @@ class Psr16MemoryCache implements \Psr\SimpleCache\CacheInterface
         return $self;
     }
 
-    private function __construct()
+    public function __construct()
     {
     }
 

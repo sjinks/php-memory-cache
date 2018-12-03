@@ -6,6 +6,9 @@ class Psr6MemoryCache implements \Psr\Cache\CacheItemPoolInterface
 {
     private $cache = [];
 
+    /**
+     * @deprecated
+     */
     public static function instance()
     {
         static $self = null;
@@ -17,7 +20,7 @@ class Psr6MemoryCache implements \Psr\Cache\CacheItemPoolInterface
         return $self;
     }
 
-    private function __construct()
+    public function __construct()
     {
     }
 
